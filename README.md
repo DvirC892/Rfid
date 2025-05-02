@@ -2,6 +2,11 @@
 
 This project is a simple RFID-based access control system using an Arduino, an RFID reader, an LCD display, a servo motor, a buzzer, and two LEDs. It demonstrates how to read RFID cards, verify authorized access, and respond with visual, audio, and mechanical feedback.
 
+## 📽️ Demo Video
+
+[![Watch the demo](https://img.youtube.com/vi/X3amtoCaKyU/0.jpg)](https://www.youtube.com/shorts/X3amtoCaKyU)  
+🔗 Click the image or [watch the video here](https://www.youtube.com/shorts/X3amtoCaKyU) to see the system in action.
+
 ## 📦 Project Overview
 
 The project consists of **two main parts**:
