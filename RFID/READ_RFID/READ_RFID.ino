@@ -6,23 +6,22 @@
 #define RST_PIN 9    
 #define NSS_PIN 10   
 
-MFRC522 mfrc522(NSS_PIN, RST_PIN);  // יצירת אובייקט של קורא RFID
+MFRC522 mfrc522(NSS_PIN, RST_PIN);  
 
-// יצירת אובייקט LCD
-LiquidCrystal_I2C lcd(0x27, 16, 2);  // כתובת I2C של LCD 0x27, 16 עמודות ו-2 שורות
+LiquidCrystal_I2C lcd(0x27, 16, 2);  
 
 void setup() {
-  Serial.begin(9600);    // התחלת יציאת serial
-  lcd.begin(16, 2);      // התחלת המסך LCD עם 16 עמודות ו-2 שורות
-  lcd.backlight();       // הדלקת תאורה אחורית במסך LCD
+  Serial.begin(9600);    
+  lcd.begin(16, 2);     
+  lcd.backlight();       
   
-  SPI.begin();           // התחלת תקשורת SPI
-  mfrc522.PCD_Init();    // אתחול קורא ה-RFID
+  SPI.begin();           
+  mfrc522.PCD_Init();    
 
-  lcd.setCursor(0, 0);   // הצבת הסמן בתור הראשון
-  lcd.print("Welcome:-)"); // הדפסת כותרת במסך
-  delay(5000);            // השהיה של שניה
-  lcd.clear();            // ניקוי המסך
+  lcd.setCursor(0, 0);   
+  lcd.print("Welcome:-)"); 
+  delay(5000);            
+  lcd.clear();            
 }
 
 void loop() {
@@ -32,15 +31,15 @@ void loop() {
       // הצגת המזהה של הכרטיס על ה-LCD
       String cardID = "";
       for (byte i = 0; i < mfrc522.uid.size; i++) {
-        cardID += String(mfrc522.uid.uidByte[i], HEX); // יצירת מחרוזת מזהה הכרטיס
+        cardID += String(mfrc522.uid.uidByte[i], HEX); 
       }
       
       lcd.clear();
-      lcd.setCursor(0, 0);    // הצבת הסמן בשורה הראשונה
-      lcd.print("Card UID:");  // הצגת טקסט
-      lcd.setCursor(0, 1);    // הצבת הסמן בשורה השנייה
-      lcd.print(cardID);      // הצגת המזהה של הכרטיס
-      delay(3000);            // הצגת המידע למשך 3 שניות
+      lcd.setCursor(0, 0);    
+      lcd.print("Card UID:");  
+      lcd.setCursor(0, 1);   
+      lcd.print(cardID);      
+      delay(3000);           
     }
   }
 }
