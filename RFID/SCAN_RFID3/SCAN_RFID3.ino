@@ -4,27 +4,23 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-// Define RFID pins
 #define RST_PIN 9
 #define SS_PIN 10
 
-// Define LEDs and buzzer pins
 #define RED_LED_PIN 7
 #define YELLOW_LED_PIN 4
 #define BUZZER_PIN 8
-
-// Define ultrasonic sensor pins
 #define TRIG_PIN 2
 #define ECHO_PIN 3
 
-MFRC522 mfrc522(SS_PIN, RST_PIN);   // RFID reader
-Servo myservo;                      // Servo
-LiquidCrystal_I2C lcd(0x27, 16, 2); // LCD screen
+MFRC522 mfrc522(SS_PIN, RST_PIN);   
+Servo myservo;                      
+LiquidCrystal_I2C lcd(0x27, 16, 2); 
 
-String allowedCardID = "13ad68fa";  // Allowed card ID
+String allowedCardID = "13ad68fa";  
 
-unsigned long previousMillis = 0;   // For timing distance measurement
-const long interval = 500;          // Interval for distance reading (ms)
+unsigned long previousMillis = 0;   
+const long interval = 500;          
 
 int currentDistance = 0;
 
@@ -56,8 +52,7 @@ void loop() {
     Serial.print(currentDistance);
     Serial.println(" cm");
   }
-
-  // RFID card present?
+  
   if (mfrc522.PICC_IsNewCardPresent()) {
     if (mfrc522.PICC_ReadCardSerial()) {
       String cardID = "";
@@ -86,10 +81,10 @@ void loop() {
         Serial.println(" cm");
 
         if (currentDistance <= 15) {
-          myservo.write(0);  // Open servo
+          myservo.write(0);  
           delay(100);
            int scandistance = 0;
-          // Wait while object is near
+          
           while (scandistance <= 15) {
             Serial.print("Distance on card scan: ");
             scandistance = getDistance();
@@ -99,7 +94,7 @@ void loop() {
           }
 
           delay(2000);
-          myservo.write(90);   // Close servo
+          myservo.write(90);   
         }
 
         delay(2000);
